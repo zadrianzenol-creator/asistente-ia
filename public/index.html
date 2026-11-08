@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Asistente</title>
+<meta name="description" content="Asistente de IA en el navegador. Sin registro.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#212121" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<script src="/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/vendor/katex/katex.min.css">
+<script src="/vendor/katex/katex.min.js" defer></script>
+<script src="/docs.js" defer></script>
+<script src="/export.js" defer></script>
+<script src="/app.js" defer></script>
+</head>
+<body>
+<div class="app" id="app" data-mode="home" data-side="open">
+  <div class="scrim" id="scrim"></div>
+
+  <aside class="sidebar" id="sidebar" aria-label="Barra lateral">
+    <div class="side-top">
+      <span class="mark" aria-hidden="true"><svg class="i" data-ic="spark"></svg></span>
+      <button class="icon-btn" id="closeSide" aria-label="Cerrar barra lateral"><svg class="i" data-ic="panel"></svg></button>
+    </div>
+    <nav>
+      <button class="nav-item" id="newChat"><svg class="i" data-ic="edit"></svg>Nuevo chat</button>
+      <button class="nav-item" id="searchBtn"><svg class="i" data-ic="search"></svg>Buscar chats</button>
+      <div class="search-wrap" id="searchWrap" hidden><input id="searchInput" type="search" placeholder="Buscar…" aria-label="Buscar chats" autocomplete="off"></div>
+      <button class="nav-item" id="installBtn" hidden><svg class="i" data-ic="download"></svg>Instalar app</button>
+    </nav>
+    <div class="group-label">Chats</div>
+    <div class="chat-list" id="chatList" role="list"></div>
+    <div class="side-foot">
+      <div class="profile">
+        <span class="avatar">IN</span>
+        <span><b>Invitado</b><small>Plan gratuito</small></span>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="dropzone" id="dropzone" hidden>Suelta aquí tus imágenes o documentos</div>
+    <header>
+      <button class="icon-btn only-closed" id="openSide" aria-label="Abrir barra lateral"><svg class="i" data-ic="panel"></svg></button>
+      <div class="model-wrap">
+        <button class="model-btn" id="modelBtn" aria-haspopup="menu" aria-expanded="false"><span id="modelName">Asistente</span><svg class="i" data-ic="down"></svg></button>
+        <div class="pop" id="modelPop" role="menu" hidden>
+          <button role="menuitemradio" data-model="fast" aria-checked="true"><span><b>Asistente</b><small>Respuestas rápidas para el día a día</small></span><svg class="i" data-ic="check"></svg></button>
+          <button role="menuitemradio" data-model="pro" aria-checked="false"><span><b>Asistente Pro</b><small>Razona más antes de responder</small></span><svg class="i off" data-ic="check"></svg></button>
+        </div>
+      </div>
+      <span class="spacer"></span>
+      <button class="icon-btn" id="themeBtn" aria-label="Cambiar tema"><svg class="i" data-ic="moon" id="themeIc"></svg></button>
+    </header>
+
+    <section class="stage">
+      <div class="thread" id="thread"><div class="thread-inner" id="threadInner"></div></div>
+
+      <div class="dock">
+        <h1 class="hero">¿Por dónde empezamos?</h1>
+        <form class="composer" id="form" autocomplete="off">
+          <div class="attach" id="attach" hidden></div>
+          <textarea id="input" rows="1" placeholder="Pregunta lo que quieras" aria-label="Mensaje" maxlength="20000"></textarea>
+          <div class="tools">
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,.pdf,.docx,.xlsx,.pptx,.csv,.tsv,.txt,.md,.json,.doc,.xls,.ppt" multiple hidden>
+            <button type="button" class="tool-btn sq" aria-label="Adjuntar imágenes o documentos" id="attachBtn"><svg class="i" data-ic="plus"></svg></button>
+            <div class="tools-wrap">
+              <button type="button" class="tool-btn" id="toolsBtn" aria-haspopup="menu" aria-expanded="false" hidden><svg class="i" data-ic="sliders"></svg>Herramientas</button>
+              <div class="pop up" id="toolsMenu" role="menu" hidden>
+                <button type="button" class="menu-item" role="menuitem" data-tool="image"><svg class="i" data-ic="image"></svg>Crear o editar imagen</button>
+              </div>
+            </div>
+            <button type="button" class="mode-chip" id="modeChip" aria-label="Quitar modo imagen" hidden><svg class="i" data-ic="image"></svg>Imagen<svg class="i" data-ic="x"></svg></button>
+            <span class="spacer"></span>
+            <button type="button" class="tool-btn sq" aria-label="Dictar por voz" aria-pressed="false" id="micBtn" hidden><svg class="i" data-ic="mic"></svg></button>
+            <button type="submit" class="send" id="send" aria-label="Enviar mensaje" disabled><svg class="i" data-ic="up"></svg></button>
+          </div>
+        </form>
+        <div class="chips" id="chips">
+          <button class="chip" type="button">Resumir un texto</button>
+          <button class="chip" type="button">Explicar un concepto</button>
+          <button class="chip" type="button">Escribir código</button>
+          <button class="chip" type="button">Ideas para un proyecto</button>
+        </div>
+        <p class="note">El asistente puede cometer errores. Verifica la información importante. <a href="/privacidad.html">Privacidad</a></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="pop fixed" id="chatMenu" role="menu" hidden>
+  <button class="menu-item" role="menuitem" data-do="rename"><svg class="i" data-ic="pencil"></svg>Cambiar nombre</button>
+  <button class="menu-item" role="menuitem" data-do="delete"><svg class="i" data-ic="trash"></svg>Eliminar</button>
+</div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" hidden>
+  <img id="lbImg" alt="">
+  <div class="lb-bar"><button type="button" id="lbDl">Descargar</button><button type="button" id="lbClose">Cerrar</button></div>
+</div>
+<div class="pop fixed" id="exportMenu" role="menu" hidden>
+  <button type="button" class="menu-item" role="menuitem" data-fmt="docx"><svg class="i" data-ic="file"></svg>Word (.docx)</button>
+  <button type="button" class="menu-item" role="menuitem" data-fmt="pdf"><svg class="i" data-ic="file"></svg>PDF (.pdf)</button>
+  <button type="button" class="menu-item" role="menuitem" data-fmt="xlsx"><svg class="i" data-ic="file"></svg>Excel (.xlsx), desde las tablas</button>
+  <button type="button" class="menu-item" role="menuitem" data-fmt="pptx"><svg class="i" data-ic="file"></svg>PowerPoint (.pptx)</button>
+  <button type="button" class="menu-item" role="menuitem" data-fmt="md"><svg class="i" data-ic="file"></svg>Texto Markdown (.md)</button>
+  <div class="menu-sep" role="separator"></div>
+  <button type="button" class="menu-item" role="menuitemcheckbox" aria-checked="false" data-apa><svg class="i off" data-ic="check"></svg>Formato APA 7 (Word y PDF)</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="update-bar" id="updateBar" role="status"><span>Hay una versión nueva.</span><button type="button" id="updateBtn">Actualizar</button></div>
+</body>
+</html>

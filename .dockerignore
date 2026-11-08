@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+node_modules
+test
+scripts
+*.md
+maqueta-original.html
+.git
+.gitignore

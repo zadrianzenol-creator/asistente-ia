@@ -1,0 +1,7 @@
+# Cambia tu-dominio.com por tu dominio real. Caddy obtiene y renueva el certificado HTTPS solo.
+tu-dominio.com {
+	encode off            # la app ya comprime sus archivos; así no se toca el streaming de las respuestas
+	reverse_proxy app:3000 {
+		flush_interval -1   # envía cada fragmento de la respuesta en cuanto llega (necesario para el streaming)
+	}
+}

@@ -1,0 +1,15 @@
+{
+  "name": "asistente-ia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Asistente de IA con interfaz de chat, backend seguro y PWA",
+  "license": "UNLICENSED",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "check-key": "node scripts/check-key.js",
+    "test:e2e": "node test/e2e.js && node test/e2e-images.js && node test/e2e-docs.js && node test/e2e-update.js",
+    "test:real": "node test/real-docs.js"
+  }
+}

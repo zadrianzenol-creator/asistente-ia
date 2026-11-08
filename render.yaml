@@ -1,0 +1,12 @@
+# Plantilla para Render (render.com). Revisa en su documentación el esquema y los planes vigentes.
+services:
+  - type: web
+    name: asistente-ia
+    runtime: docker
+    plan: free              # el plan gratuito se "duerme" tras un rato sin visitas
+    healthCheckPath: /api/health
+    envVars:
+      - { key: TRUST_PROXY, value: "1" }
+      - { key: GEMINI_API_KEY, sync: false }     # se pide al crear el servicio; no se guarda en el repositorio
+      - { key: OPENAI_API_KEY, sync: false }
+      - { key: ANTHROPIC_API_KEY, sync: false }

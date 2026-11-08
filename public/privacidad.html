@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacidad · Asistente</title>
+<script src="/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="doc">
+<main class="doc-wrap">
+  <p><a href="/">← Volver al chat</a></p>
+  <h1>Privacidad</h1>
+  <p class="lead">Última actualización: noviembre de 2026. Responsable del servicio: <strong>[completa aquí el nombre y un contacto]</strong>.</p>
+
+  <h2>Qué se guarda y dónde</h2>
+  <ul>
+    <li><strong>Tu historial de chats</strong> se guarda solo en este dispositivo (en el almacenamiento local del navegador). No hay cuentas y no se pide correo ni contraseña.</li>
+    <li>Las <strong>imágenes</strong> que adjuntas o que se crean también se guardan solo en este dispositivo. Antes de enviarlas se reescalan y se vuelven a codificar, lo que elimina metadatos como la ubicación (EXIF).</li>
+    <li>Los <strong>documentos</strong> que adjuntas (Word, PDF, Excel, PowerPoint, CSV, texto) se leen en tu navegador y se guardan solo en este dispositivo, junto con el original de los Word para poder editarlos.</li>
+    <li>El servidor <strong>no guarda el contenido de tus mensajes, imágenes ni documentos</strong>: no se escribe en disco ni en registros.</li>
+    <li>Tu dirección IP se usa solo en memoria, de forma temporal, para aplicar los límites de uso y evitar abusos. No se almacena de forma permanente.</li>
+  </ul>
+
+  <h2>Qué se envía a terceros</h2>
+  <ul>
+    <li>Para generar cada respuesta, el texto de la conversación (hasta los últimos mensajes) y las imágenes recientes que hayas adjuntado se envían a la API de uno de estos proveedores a través de nuestro servidor: <strong>OpenAI</strong>, <strong>Anthropic (Claude)</strong> o <strong>Google Gemini</strong>. Si el principal falla, se usa el siguiente.</li>
+    <li>De cada documento adjunto se envía al proveedor <strong>el texto extraído</strong> (no el archivo original), y en los PDF escaneados, las primeras páginas como imágenes. Los archivos que descargas (Word, PDF, Excel, PowerPoint) se generan en tu navegador.</li>
+    <li>Para <strong>crear o editar imágenes</strong>, tu descripción y las imágenes seleccionadas se envían a OpenAI. Esa función tiene un costo para quien administra el servicio, por lo que tiene límites diarios más estrictos.</li>
+    <li>Las condiciones de cada proveedor determinan qué hacen con los datos. En los niveles gratuitos de Google pueden usarse para mejorar sus productos, incluida su revisión por personas. <strong>No envíes información sensible</strong> (contraseñas, datos bancarios, datos médicos o de terceros, documentos de identidad).</li>
+    <li>Si usas el <strong>dictado por voz</strong>, el reconocimiento lo realiza tu navegador; en algunos navegadores, como Chrome, el audio se envía a los servidores de su fabricante.</li>
+  </ul>
+
+  <h2>Tu control</h2>
+  <ul>
+    <li>Puedes cambiar el nombre o eliminar cada conversación desde la barra lateral.</li>
+    <li>También puedes borrar todo lo guardado en este dispositivo:</li>
+  </ul>
+  <button class="btn" id="wipe" type="button">Borrar mis datos locales</button>
+  <p id="wipeMsg" class="lead" role="status"></p>
+
+  <h2>Límites del servicio</h2>
+  <p>El servicio es gratuito y depende de cuotas de terceros, por lo que puede aplicar límites de uso por minuto y por día, o dejar de responder temporalmente cuando esas cuotas se agoten.</p>
+</main>
+<script src="/privacy.js"></script>
+</body>
+</html>
