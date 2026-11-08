@@ -1,7 +1,7 @@
 /* Service worker: permite instalar la app y abrir la interfaz sin conexión.
  * Las respuestas de IA SIEMPRE necesitan internet: /api/* nunca se cachea.
  * Al publicar cambios, sube VERSION para que los usuarios reciban la actualización. */
-const VERSION = 'v3';
+const VERSION = 'v4';
 const CACHE = 'asistente-' + VERSION;
 const SHELL = [
   '/', '/index.html', '/style.css', '/app.js', '/docs.js', '/export.js', '/theme.js', '/manifest.webmanifest', '/privacidad.html', '/privacy.js',
